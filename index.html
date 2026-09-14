@@ -84,6 +84,59 @@
         </aside>
       </div>
     </section>
+
+    <section class="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-4 sm:px-5">
+      <div class="mb-5 flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="mb-2.5 text-[11px] font-extrabold tracking-[0.14em] text-primary">OVERVIEW</p>
+          <h2 class="m-0 text-[28px] tracking-[-0.035em]">Your workspace</h2>
+        </div>
+        <p class="m-0 max-w-none text-sm text-app-muted sm:max-w-[420px]">A quick snapshot of what needs attention today.</p>
+      </div>
+
+      <div class="mb-5 flex items-center gap-3 rounded-2xl border border-primary/20 bg-primary/10 px-4 py-3">
+        <span class="grid h-8 w-8 flex-none place-items-center rounded-full bg-primary text-sm text-white">!</span>
+        <p class="m-0 text-sm text-app-text">
+          <strong class="font-bold">2 tasks are due soon.</strong>
+          <span class="text-app-muted">Check the deadlines panel below to stay on track.</span>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 min-[960px]:grid-cols-4">
+        <article class="flex gap-[14px] rounded-card border border-app-line bg-app-surface p-5 shadow-card transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[#f0edff] text-[11px] font-extrabold text-primary">01</div>
+          <div>
+            <p class="m-0 mb-1 text-xs text-app-muted">Active projects</p>
+            <strong class="block text-[26px] leading-[1.1]">3</strong>
+            <span class="mt-[7px] block text-[10px] font-bold text-accent-green">+1 this month</span>
+          </div>
+        </article>
+        <article class="flex gap-[14px] rounded-card border border-app-line bg-app-surface p-5 shadow-card transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[#f0edff] text-[11px] font-extrabold text-primary">02</div>
+          <div>
+            <p class="m-0 mb-1 text-xs text-app-muted">Tasks completed</p>
+            <strong class="block text-[26px] leading-[1.1]">18</strong>
+            <span class="mt-[7px] block text-[10px] font-bold text-accent-green">+6 this week</span>
+          </div>
+        </article>
+        <article class="flex gap-[14px] rounded-card border border-app-line bg-app-surface p-5 shadow-card transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[#f0edff] text-[11px] font-extrabold text-primary">03</div>
+          <div>
+            <p class="m-0 mb-1 text-xs text-app-muted">Quiz average</p>
+            <strong class="block text-[26px] leading-[1.1]">84%</strong>
+            <span class="mt-[7px] block text-[10px] font-bold text-app-muted">Last 4 quizzes</span>
+          </div>
+        </article>
+        <article class="flex gap-[14px] rounded-card border border-app-line bg-app-surface p-5 shadow-card transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-soft">
+          <div class="grid h-10 w-10 flex-none place-items-center rounded-xl bg-[#f0edff] text-[11px] font-extrabold text-primary">04</div>
+          <div>
+            <p class="m-0 mb-1 text-xs text-app-muted">Focus time</p>
+            <strong class="block text-[26px] leading-[1.1]">7.5h</strong>
+            <span class="mt-[7px] block text-[10px] font-bold text-accent-green">+12% vs last week</span>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script type="module" src="/src/app.js"></script>
