@@ -6,9 +6,86 @@
   <title>CampusFlow Dashboard</title>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="bg-app-bg text-app-text">
-  <main class="min-h-screen grid place-items-center">
-    <p class="text-primary font-bold text-2xl">Tailwind is working</p>
+<body class="m-0 bg-app-bg text-app-text leading-relaxed">
+  <header class="sticky top-0 z-50 border-b border-app-line/90 bg-white/92 backdrop-blur-[14px]">
+    <div class="mx-auto flex min-h-[72px] w-full max-w-[1180px] items-center gap-7 px-3.5 sm:px-5">
+      <a class="inline-flex items-center gap-2.5 font-extrabold tracking-[-0.02em]" href="#">
+        <span class="grid h-[38px] w-[38px] place-items-center rounded-xl bg-gradient-to-br from-primary to-[#8a7dff] text-[13px] text-white shadow-badge">CF</span>
+        <span>CampusFlow</span>
+      </a>
+
+      <button
+        class="ml-auto grid h-[42px] w-[42px] place-items-center rounded-[10px] p-[9px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 min-[960px]:hidden"
+        id="menuButton"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        <span class="block h-0.5 w-full rounded-full bg-app-text"></span>
+        <span class="mt-[5px] block h-0.5 w-full rounded-full bg-app-text"></span>
+        <span class="mt-[5px] block h-0.5 w-full rounded-full bg-app-text"></span>
+      </button>
+
+      <nav
+        class="absolute inset-x-5 top-[72px] z-40 hidden flex-col items-stretch gap-1 rounded-2xl border border-app-line bg-white p-2.5 shadow-soft min-[960px]:static min-[960px]:z-auto min-[960px]:ml-[18px] min-[960px]:flex min-[960px]:flex-row min-[960px]:items-center min-[960px]:gap-1.5 min-[960px]:rounded-none min-[960px]:border-0 min-[960px]:bg-transparent min-[960px]:p-0 min-[960px]:shadow-none"
+        id="mainNav"
+      >
+        <a class="rounded-[10px] bg-[#f1f3f8] px-3 py-[9px] text-sm font-semibold text-app-text transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#">Dashboard</a>
+        <a class="rounded-[10px] px-3 py-[9px] text-sm font-semibold text-app-muted transition-colors duration-150 hover:bg-[#f1f3f8] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#projects">Projects</a>
+        <a class="rounded-[10px] px-3 py-[9px] text-sm font-semibold text-app-muted transition-colors duration-150 hover:bg-[#f1f3f8] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#deadlines">Deadlines</a>
+        <a class="rounded-[10px] px-3 py-[9px] text-sm font-semibold text-app-muted transition-colors duration-150 hover:bg-[#f1f3f8] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#resources">Resources</a>
+      </nav>
+
+      <div class="ml-0 flex items-center gap-2.5 min-[960px]:ml-auto">
+        <div class="grid h-[38px] w-[38px] place-items-center rounded-full bg-app-text text-xs font-extrabold text-white">AZ</div>
+        <div class="hidden gap-px sm:grid">
+          <strong class="text-[13px]">Alex Student</strong>
+          <span class="text-[11px] text-app-muted">Web Programming</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="bg-[radial-gradient(circle_at_15%_10%,rgba(109,93,252,0.14),transparent_34%),radial-gradient(circle_at_85%_0%,rgba(55,136,255,0.10),transparent_28%)] pt-[42px] pb-12 sm:pt-16">
+      <div class="mx-auto grid w-full max-w-[1180px] grid-cols-1 items-center gap-8 px-3.5 sm:px-5 min-[960px]:grid-cols-[1.4fr_0.8fr] min-[960px]:gap-14">
+        <div>
+          <span class="mb-2.5 block text-[11px] font-extrabold tracking-[0.14em] text-primary">MONDAY WORKSPACE</span>
+          <h1 class="m-0 max-w-[760px] text-[43px] leading-[0.98] tracking-[-0.055em] sm:text-[clamp(42px,6vw,72px)]">Build, learn, and ship something useful.</h1>
+          <p class="mt-6 max-w-[650px] text-base text-app-muted sm:text-lg">Track your current web-development tasks, upcoming deadlines, and project progress in one place.</p>
+          <div class="mt-[30px] grid gap-3 sm:flex sm:flex-wrap">
+            <a class="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl bg-primary px-[18px] text-sm font-bold text-white shadow-button transition-all duration-150 hover:-translate-y-px hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto" href="#projects">View projects</a>
+            <a class="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl border border-app-line bg-white px-[18px] text-sm font-bold transition-all duration-150 hover:-translate-y-px hover:shadow-[0_10px_24px_rgba(34,45,78,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto" href="#resources">Open resources</a>
+          </div>
+        </div>
+
+        <aside class="rounded-[22px] border border-white/60 bg-white/78 p-6 shadow-soft backdrop-blur-[10px]">
+          <p class="mb-[18px] text-[13px] font-bold text-app-muted">This week</p>
+          <div class="mb-[9px] flex items-center justify-between gap-4 text-[13px]">
+            <span class="text-app-muted">Course progress</span>
+            <strong>68%</strong>
+          </div>
+          <div class="h-[9px] overflow-hidden rounded-full bg-[#eceef4]">
+            <div class="h-full rounded-full bg-gradient-to-r from-primary to-[#8e80ff]" style="width: 68%"></div>
+          </div>
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <div class="rounded-2xl bg-app-surface-soft p-[16px_10px] text-center">
+              <strong class="block text-[21px]">4</strong>
+              <span class="mt-[3px] block text-[10px] text-app-muted">Open tasks</span>
+            </div>
+            <div class="rounded-2xl bg-app-surface-soft p-[16px_10px] text-center">
+              <strong class="block text-[21px]">2</strong>
+              <span class="mt-[3px] block text-[10px] text-app-muted">Due soon</span>
+            </div>
+            <div class="rounded-2xl bg-app-surface-soft p-[16px_10px] text-center">
+              <strong class="block text-[21px]">7</strong>
+              <span class="mt-[3px] block text-[10px] text-app-muted">Completed</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
   </main>
+
+  <script type="module" src="/src/app.js"></script>
 </body>
 </html>
