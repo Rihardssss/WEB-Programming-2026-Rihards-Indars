@@ -137,6 +137,67 @@
         </article>
       </div>
     </section>
+
+    <section class="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-4 sm:px-5" id="projects">
+      <div class="mb-5 flex flex-col items-stretch gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="mb-2.5 text-[11px] font-extrabold tracking-[0.14em] text-primary">PROJECTS</p>
+          <h2 class="m-0 text-[28px] tracking-[-0.035em]">Current work</h2>
+        </div>
+        <div class="inline-flex w-full gap-1 rounded-xl border border-app-line bg-white p-1 sm:w-auto" aria-label="Project filters" id="filterGroup">
+          <button class="flex-1 rounded-lg bg-[#f0f2f7] px-3 py-[7px] text-xs font-bold text-app-text transition-colors duration-150 hover:bg-[#f0f2f7] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:flex-none" data-filter="all">All</button>
+          <button class="flex-1 rounded-lg px-3 py-[7px] text-xs font-bold text-app-muted transition-colors duration-150 hover:bg-[#f0f2f7] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:flex-none" data-filter="active">Active</button>
+          <button class="flex-1 rounded-lg px-3 py-[7px] text-xs font-bold text-app-muted transition-colors duration-150 hover:bg-[#f0f2f7] hover:text-app-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:flex-none" data-filter="done">Done</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3" id="projectGrid">
+        <article class="rounded-card border border-app-line bg-app-surface p-[22px] transition-all duration-[180ms] hover:-translate-y-[3px] hover:border-[#d5d9e6] hover:shadow-soft" data-status="active">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#f0edff] px-[9px] text-[10px] font-extrabold text-[#6352ed]">Frontend</span>
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#eef6ff] px-[9px] text-[10px] font-extrabold text-accent-blue">Active</span>
+          </div>
+          <h3 class="mt-6 mb-2 text-xl tracking-[-0.025em]">Responsive Portfolio</h3>
+          <p class="m-0 min-h-[66px] text-[13px] text-app-muted">Create a polished portfolio with reusable components and responsive layouts.</p>
+          <div class="mt-[22px] mb-[9px] flex items-center justify-between gap-3 text-[10px] font-bold text-app-muted">
+            <span>Due Sep 21</span>
+            <span>72% complete</span>
+          </div>
+          <div class="h-[7px] overflow-hidden rounded-full bg-[#eceef4]"><div class="h-full rounded-full bg-primary" style="width:72%"></div></div>
+          <a class="mt-[18px] inline-block text-xs font-extrabold text-primary hover:text-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#">Open project →</a>
+        </article>
+
+        <article class="rounded-card border border-app-line bg-app-surface p-[22px] transition-all duration-[180ms] hover:-translate-y-[3px] hover:border-[#d5d9e6] hover:shadow-soft" data-status="active">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#eaf3ff] px-[9px] text-[10px] font-extrabold text-[#2f78d6]">API</span>
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#eef6ff] px-[9px] text-[10px] font-extrabold text-accent-blue">Active</span>
+          </div>
+          <h3 class="mt-6 mb-2 text-xl tracking-[-0.025em]">Weather Dashboard</h3>
+          <p class="m-0 min-h-[66px] text-[13px] text-app-muted">Fetch remote data, handle loading states, and present forecast information clearly.</p>
+          <div class="mt-[22px] mb-[9px] flex items-center justify-between gap-3 text-[10px] font-bold text-app-muted">
+            <span>Due Sep 28</span>
+            <span>45% complete</span>
+          </div>
+          <div class="h-[7px] overflow-hidden rounded-full bg-[#eceef4]"><div class="h-full rounded-full bg-accent-blue" style="width:45%"></div></div>
+          <a class="mt-[18px] inline-block text-xs font-extrabold text-primary hover:text-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#">Open project →</a>
+        </article>
+
+        <article class="rounded-card border border-app-line bg-app-surface p-[22px] transition-all duration-[180ms] hover:-translate-y-[3px] hover:border-[#d5d9e6] hover:shadow-soft" data-status="done">
+          <div class="flex items-center justify-between gap-3">
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#e9f8f2] px-[9px] text-[10px] font-extrabold text-[#16875b]">JavaScript</span>
+            <span class="inline-flex min-h-[25px] items-center rounded-full bg-[#edf9f4] px-[9px] text-[10px] font-extrabold text-accent-green">Done</span>
+          </div>
+          <h3 class="mt-6 mb-2 text-xl tracking-[-0.025em]">Task Manager</h3>
+          <p class="m-0 min-h-[66px] text-[13px] text-app-muted">Build a small CRUD interface with filtering, local storage, and form validation.</p>
+          <div class="mt-[22px] mb-[9px] flex items-center justify-between gap-3 text-[10px] font-bold text-app-muted">
+            <span>Submitted Sep 7</span>
+            <span>100% complete</span>
+          </div>
+          <div class="h-[7px] overflow-hidden rounded-full bg-[#eceef4]"><div class="h-full rounded-full bg-accent-green" style="width:100%"></div></div>
+          <a class="mt-[18px] inline-block text-xs font-extrabold text-primary hover:text-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2" href="#">View submission →</a>
+        </article>
+      </div>
+    </section>
   </main>
 
   <script type="module" src="/src/app.js"></script>
