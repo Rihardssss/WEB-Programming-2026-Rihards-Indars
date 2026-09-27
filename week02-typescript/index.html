@@ -154,6 +154,86 @@
       <div class="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3" id="projectGrid"></div>
     </section>
 
+    <section class="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-4 sm:px-5">
+      <div class="mb-5">
+        <p class="mb-2.5 text-[11px] font-extrabold tracking-[0.14em] text-primary">NEW</p>
+        <h2 class="m-0 text-[28px] tracking-[-0.035em]">Add a project</h2>
+      </div>
+
+      <form class="grid gap-4 rounded-card border border-app-line bg-app-surface p-6" id="addProjectForm" novalidate>
+        <div class="grid gap-1.5">
+          <label class="text-xs font-bold text-app-text" for="projectTitle">Title</label>
+          <input
+            class="rounded-xl border border-app-line bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            type="text"
+            id="projectTitle"
+            name="title"
+          />
+          <p class="hidden text-xs font-bold text-accent-red" id="projectTitleError"></p>
+        </div>
+
+        <div class="grid gap-1.5">
+          <label class="text-xs font-bold text-app-text" for="projectDescription">Description</label>
+          <textarea
+            class="rounded-xl border border-app-line bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+            id="projectDescription"
+            name="description"
+            rows="3"
+          ></textarea>
+          <p class="hidden text-xs font-bold text-accent-red" id="projectDescriptionError"></p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="grid gap-1.5">
+            <label class="text-xs font-bold text-app-text" for="projectCategory">Category</label>
+            <select
+              class="rounded-xl border border-app-line bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              id="projectCategory"
+              name="category"
+            >
+              <option value="">Select...</option>
+              <option value="Frontend">Frontend</option>
+              <option value="API">API</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="Design">Design</option>
+            </select>
+            <p class="hidden text-xs font-bold text-accent-red" id="projectCategoryError"></p>
+          </div>
+
+          <div class="grid gap-1.5">
+            <label class="text-xs font-bold text-app-text" for="projectDueDate">Due date</label>
+            <input
+              class="rounded-xl border border-app-line bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              type="date"
+              id="projectDueDate"
+              name="dueDate"
+            />
+            <p class="hidden text-xs font-bold text-accent-red" id="projectDueDateError"></p>
+          </div>
+
+          <div class="grid gap-1.5">
+            <label class="text-xs font-bold text-app-text" for="projectProgress">Progress (%)</label>
+            <input
+              class="rounded-xl border border-app-line bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              type="number"
+              id="projectProgress"
+              name="progress"
+              min="0"
+              max="100"
+            />
+            <p class="hidden text-xs font-bold text-accent-red" id="projectProgressError"></p>
+          </div>
+        </div>
+
+        <button
+          class="mt-1 inline-flex min-h-[44px] w-full items-center justify-center rounded-xl bg-primary px-[18px] text-sm font-bold text-white shadow-button transition-all duration-150 hover:-translate-y-px hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto"
+          type="submit"
+        >
+          Add project
+        </button>
+      </form>
+    </section>
+
     <section class="mx-auto grid w-full max-w-[1180px] grid-cols-1 gap-[18px] px-3.5 pt-[34px] pb-16 sm:px-5 min-[960px]:grid-cols-[1.45fr_0.75fr]">
       <section class="rounded-card border border-app-line bg-app-surface p-6" id="deadlines">
         <div class="mb-5 flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
