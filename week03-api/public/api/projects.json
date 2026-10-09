@@ -1,0 +1,38 @@
+[
+  {
+    "id": "p1",
+    "title": "Responsive Portfolio",
+    "description": "Create a polished portfolio with reusable components and responsive layouts.",
+    "category": "Frontend",
+    "status": "active",
+    "dueDate": "2026-10-21",
+    "progress": 72
+  },
+  {
+    "id": "p2",
+    "title": "Weather Dashboard",
+    "description": "Fetch remote data, handle loading states, and present forecast information clearly.",
+    "category": "API",
+    "status": "active",
+    "dueDate": "2026-10-28",
+    "progress": 45
+  },
+  {
+    "id": "p3",
+    "title": "Task Manager",
+    "description": "Build a small CRUD interface with filtering, local storage, and form validation.",
+    "category": "JavaScript",
+    "status": "done",
+    "dueDate": "2026-10-05",
+    "progress": 100
+  },
+  {
+    "id": "p4",
+    "title": "Campus Events API",
+    "description": "Design a small JSON API for upcoming campus events and connect it to the page.",
+    "category": "API",
+    "status": "active",
+    "dueDate": "2026-11-04",
+    "progress": 10
+  }
+]
