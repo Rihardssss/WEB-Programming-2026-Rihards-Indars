@@ -36,3 +36,17 @@ export function isDeadline(value: unknown): value is Deadline {
     typeof value.time === "string"
   );
 }
+
+export function isCurrentWeatherPayload(
+  value: unknown
+): value is { temperature_2m: number; wind_speed_10m: number; weather_code: number } {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.temperature_2m === "number" &&
+    typeof value.wind_speed_10m === "number" &&
+    typeof value.weather_code === "number"
+  );
+}

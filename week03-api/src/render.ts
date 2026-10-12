@@ -1,4 +1,4 @@
-import type { Project, Deadline, Category, LoadState } from "./types";
+import type { Project, Deadline, Category, LoadState, CurrentWeather } from "./types";
 
 const CATEGORY_BADGE_CLASS: Record<Category, string> = {
   Frontend: "bg-[#f0edff] text-[#6352ed]",
@@ -178,6 +178,29 @@ export function renderProjects(state: LoadState<Project[]>, onRetry: () => void)
       const activeProjects = state.data.filter((project) => project.status === "active");
       activeCount.textContent = String(activeProjects.length);
     }
+  }
+}
+
+export function renderWeather(state: LoadState<CurrentWeather>): void {
+  const temp = document.querySelector<HTMLElement>("#weatherTemp");
+  const status = document.querySelector<HTMLElement>("#weatherStatus");
+
+  if (!temp || !status) {
+    return;
+  }
+
+  if (state.status === "loading") {
+    temp.textContent = "…";
+    status.textContent = "Loading weather…";
+    status.className = "mt-[7px] block text-[10px] font-bold text-app-muted";
+  } else if (state.status === "error") {
+    temp.textContent = "–";
+    status.textContent = "Weather unavailable";
+    status.className = "mt-[7px] block text-[10px] font-bold text-app-muted";
+  } else {
+    temp.textContent = `${Math.round(state.data.temperature)}°C`;
+    status.textContent = `Wind ${Math.round(state.data.windSpeed)} km/h`;
+    status.className = "mt-[7px] block text-[10px] font-bold text-accent-green";
   }
 }
 

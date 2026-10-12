@@ -1,12 +1,13 @@
 import "./style.css";
-import type { Project, Category, ProjectFilter, LoadState, Deadline } from "./types";
-import { fetchProjects, fetchDeadlines } from "./api";
-import { renderProjects, renderDeadlines } from "./render";
+import type { Project, Category, ProjectFilter, LoadState, Deadline, CurrentWeather } from "./types";
+import { fetchProjects, fetchDeadlines, fetchWeather } from "./api";
+import { renderProjects, renderDeadlines, renderWeather } from "./render";
 import { loadLocalProjects, saveLocalProjects } from "./storage";
 
 let apiProjectsState: LoadState<Project[]> = { status: "loading" };
 let localProjects: Project[] = loadLocalProjects();
 let deadlinesState: LoadState<Deadline[]> = { status: "loading" };
+let weatherState: LoadState<CurrentWeather> = { status: "loading" };
 let currentFilter: ProjectFilter = "all";
 
 const addProjectSubmit = document.querySelector<HTMLButtonElement>("#addProjectSubmit");
@@ -65,8 +66,24 @@ async function loadDeadlines(): Promise<void> {
   renderDeadlines(deadlinesState, loadDeadlines);
 }
 
+async function loadWeather(): Promise<void> {
+  weatherState = { status: "loading" };
+  renderWeather(weatherState);
+
+  try {
+    const data = await fetchWeather();
+    weatherState = { status: "success", data };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Could not load weather.";
+    weatherState = { status: "error", message };
+  }
+
+  renderWeather(weatherState);
+}
+
 void loadProjects();
 void loadDeadlines();
+void loadWeather();
 
 const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
 const mainNav = document.querySelector<HTMLElement>("#mainNav");

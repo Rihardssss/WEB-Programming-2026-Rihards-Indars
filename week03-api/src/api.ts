@@ -1,5 +1,8 @@
-import type { Project, Deadline } from "./types";
-import { isProject, isDeadline } from "./guards";
+import type { Project, Deadline, CurrentWeather } from "./types";
+import { isProject, isDeadline, isRecord, isCurrentWeatherPayload } from "./guards";
+
+const WEATHER_URL =
+  "https://api.open-meteo.com/v1/forecast?latitude=56.95&longitude=24.11&current=temperature_2m,wind_speed_10m,weather_code&timezone=Europe%2FRiga";
 
 async function getJson(url: string): Promise<unknown> {
   const response = await fetch(url);
@@ -30,4 +33,18 @@ export async function fetchDeadlines(): Promise<Deadline[]> {
   }
 
   return data;
+}
+
+export async function fetchWeather(): Promise<CurrentWeather> {
+  const data = await getJson(WEATHER_URL);
+
+  if (!isRecord(data) || !isCurrentWeatherPayload(data.current)) {
+    throw new Error("Weather came back in an unexpected format.");
+  }
+
+  return {
+    temperature: data.current.temperature_2m,
+    windSpeed: data.current.wind_speed_10m,
+    weatherCode: data.current.weather_code,
+  };
 }
