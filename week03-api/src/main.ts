@@ -1,10 +1,10 @@
 import "./style.css";
 import type { Project, Category, ProjectFilter } from "./types";
-import { initialProjects, deadlines } from "./data";
+import { fetchProjects, fetchDeadlines } from "./api";
 import { renderProjects, renderDeadlines } from "./render";
-import { loadProjects, saveProjects } from "./storage";
+import { saveProjects } from "./storage";
 
-let projects: Project[] = loadProjects(initialProjects);
+let projects: Project[] = [];
 let currentFilter: ProjectFilter = "all";
 
 function visibleProjects(): Project[] {
@@ -18,8 +18,28 @@ function refreshProjects(): void {
   renderProjects(visibleProjects());
 }
 
-renderDeadlines(deadlines);
-refreshProjects();
+async function startProjects(): Promise<void> {
+  try {
+    projects = await fetchProjects();
+  } catch (error) {
+    console.error(error);
+    projects = [];
+  }
+  refreshProjects();
+}
+
+async function startDeadlines(): Promise<void> {
+  try {
+    const deadlines = await fetchDeadlines();
+    renderDeadlines(deadlines);
+  } catch (error) {
+    console.error(error);
+    renderDeadlines([]);
+  }
+}
+
+void startProjects();
+void startDeadlines();
 
 const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
 const mainNav = document.querySelector<HTMLElement>("#mainNav");
