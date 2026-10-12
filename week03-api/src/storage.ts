@@ -1,12 +1,12 @@
 import type { Project } from "./types";
 import { isProject } from "./guards";
 
-const STORAGE_KEY = "campusflow-projects";
+const STORAGE_KEY = "campusflow.week03.localProjects";
 
-export function loadProjects(fallback: Project[]): Project[] {
+export function loadLocalProjects(): Project[] {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) {
-    return fallback;
+    return [];
   }
 
   try {
@@ -14,12 +14,12 @@ export function loadProjects(fallback: Project[]): Project[] {
     if (Array.isArray(parsed) && parsed.every(isProject)) {
       return parsed;
     }
-    return fallback;
+    return [];
   } catch {
-    return fallback;
+    return [];
   }
 }
 
-export function saveProjects(projects: Project[]): void {
+export function saveLocalProjects(projects: Project[]): void {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
 }

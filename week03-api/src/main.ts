@@ -1,45 +1,72 @@
 import "./style.css";
-import type { Project, Category, ProjectFilter } from "./types";
+import type { Project, Category, ProjectFilter, LoadState, Deadline } from "./types";
 import { fetchProjects, fetchDeadlines } from "./api";
 import { renderProjects, renderDeadlines } from "./render";
-import { saveProjects } from "./storage";
+import { loadLocalProjects, saveLocalProjects } from "./storage";
 
-let projects: Project[] = [];
+let apiProjectsState: LoadState<Project[]> = { status: "loading" };
+let localProjects: Project[] = loadLocalProjects();
+let deadlinesState: LoadState<Deadline[]> = { status: "loading" };
 let currentFilter: ProjectFilter = "all";
 
+const addProjectSubmit = document.querySelector<HTMLButtonElement>("#addProjectSubmit");
+
 function visibleProjects(): Project[] {
-  if (currentFilter === "all") {
-    return projects;
+  if (apiProjectsState.status !== "success") {
+    return [];
   }
-  return projects.filter((project) => project.status === currentFilter);
+
+  const all = [...apiProjectsState.data, ...localProjects];
+  if (currentFilter === "all") {
+    return all;
+  }
+  return all.filter((project) => project.status === currentFilter);
 }
 
 function refreshProjects(): void {
-  renderProjects(visibleProjects());
+  if (apiProjectsState.status === "success") {
+    renderProjects({ status: "success", data: visibleProjects() }, loadProjects);
+  } else {
+    renderProjects(apiProjectsState, loadProjects);
+  }
+
+  if (addProjectSubmit) {
+    addProjectSubmit.disabled = apiProjectsState.status !== "success";
+  }
 }
 
-async function startProjects(): Promise<void> {
+async function loadProjects(): Promise<void> {
+  apiProjectsState = { status: "loading" };
+  refreshProjects();
+
   try {
-    projects = await fetchProjects();
+    const data = await fetchProjects();
+    apiProjectsState = { status: "success", data };
   } catch (error) {
-    console.error(error);
-    projects = [];
+    const message = error instanceof Error ? error.message : "Could not load projects.";
+    apiProjectsState = { status: "error", message };
   }
+
   refreshProjects();
 }
 
-async function startDeadlines(): Promise<void> {
+async function loadDeadlines(): Promise<void> {
+  deadlinesState = { status: "loading" };
+  renderDeadlines(deadlinesState, loadDeadlines);
+
   try {
-    const deadlines = await fetchDeadlines();
-    renderDeadlines(deadlines);
+    const data = await fetchDeadlines();
+    deadlinesState = { status: "success", data };
   } catch (error) {
-    console.error(error);
-    renderDeadlines([]);
+    const message = error instanceof Error ? error.message : "Could not load deadlines.";
+    deadlinesState = { status: "error", message };
   }
+
+  renderDeadlines(deadlinesState, loadDeadlines);
 }
 
-void startProjects();
-void startDeadlines();
+void loadProjects();
+void loadDeadlines();
 
 const menuButton = document.querySelector<HTMLButtonElement>("#menuButton");
 const mainNav = document.querySelector<HTMLElement>("#mainNav");
@@ -163,8 +190,8 @@ if (addProjectForm) {
       progress: progressValue,
     };
 
-    projects = [...projects, newProject];
-    saveProjects(projects);
+    localProjects = [...localProjects, newProject];
+    saveLocalProjects(localProjects);
     refreshProjects();
 
     addProjectForm.reset();

@@ -1,4 +1,4 @@
-import type { Project, Deadline, Category } from "./types";
+import type { Project, Deadline, Category, LoadState } from "./types";
 
 const CATEGORY_BADGE_CLASS: Record<Category, string> = {
   Frontend: "bg-[#f0edff] text-[#6352ed]",
@@ -49,6 +49,35 @@ function deadlineBadge(dateStr: string): { text: string; classes: string } {
     return { text: `${diff} days`, classes: "bg-[#fff5de] text-accent-yellow" };
   }
   return { text: `${diff} days`, classes: "bg-[#f1f3f6] text-[#6f7788]" };
+}
+
+function createStatusMessage(text: string, role: "status" | "alert"): HTMLElement {
+  const message = document.createElement("p");
+  message.className = "px-2 py-10 text-center text-sm text-app-muted";
+  message.setAttribute("role", role);
+  message.textContent = text;
+  return message;
+}
+
+function createErrorMessage(message: string, onRetry: () => void): HTMLElement {
+  const wrapper = document.createElement("div");
+  wrapper.className = "flex flex-col items-center gap-3 px-2 py-10 text-center";
+  wrapper.setAttribute("role", "alert");
+
+  const text = document.createElement("p");
+  text.className = "m-0 text-sm text-accent-red";
+  text.textContent = message;
+
+  const retryButton = document.createElement("button");
+  retryButton.type = "button";
+  retryButton.className =
+    "inline-flex min-h-[36px] items-center justify-center rounded-xl border border-app-line bg-white px-4 text-xs font-bold text-app-text transition-colors duration-150 hover:bg-[#f0f2f7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2";
+  retryButton.textContent = "Try again";
+  retryButton.addEventListener("click", onRetry);
+
+  wrapper.appendChild(text);
+  wrapper.appendChild(retryButton);
+  return wrapper;
 }
 
 function createProjectCard(project: Project): HTMLElement {
@@ -120,21 +149,35 @@ function createProjectCard(project: Project): HTMLElement {
   return card;
 }
 
-export function renderProjects(projects: Project[]): void {
+export function renderProjects(state: LoadState<Project[]>, onRetry: () => void): void {
   const grid = document.querySelector<HTMLElement>("#projectGrid");
-  if (!grid) {
-    return;
-  }
-
-  grid.replaceChildren();
-  for (const project of projects) {
-    grid.appendChild(createProjectCard(project));
-  }
-
   const activeCount = document.querySelector<HTMLElement>("#activeProjectsCount");
+
+  if (grid) {
+    grid.replaceChildren();
+
+    if (state.status === "loading") {
+      grid.appendChild(createStatusMessage("Loading projects…", "status"));
+    } else if (state.status === "error") {
+      grid.appendChild(createErrorMessage(state.message, onRetry));
+    } else if (state.data.length === 0) {
+      grid.appendChild(createStatusMessage("No projects to show.", "status"));
+    } else {
+      for (const project of state.data) {
+        grid.appendChild(createProjectCard(project));
+      }
+    }
+  }
+
   if (activeCount) {
-    const activeProjects = projects.filter((project) => project.status === "active");
-    activeCount.textContent = String(activeProjects.length);
+    if (state.status === "loading") {
+      activeCount.textContent = "…";
+    } else if (state.status === "error") {
+      activeCount.textContent = "–";
+    } else {
+      const activeProjects = state.data.filter((project) => project.status === "active");
+      activeCount.textContent = String(activeProjects.length);
+    }
   }
 }
 
@@ -186,14 +229,23 @@ function createDeadlineItem(deadline: Deadline): HTMLElement {
   return item;
 }
 
-export function renderDeadlines(deadlineList: Deadline[]): void {
+export function renderDeadlines(state: LoadState<Deadline[]>, onRetry: () => void): void {
   const list = document.querySelector<HTMLElement>("#deadlineList");
   if (!list) {
     return;
   }
 
   list.replaceChildren();
-  for (const deadline of deadlineList) {
-    list.appendChild(createDeadlineItem(deadline));
+
+  if (state.status === "loading") {
+    list.appendChild(createStatusMessage("Loading deadlines…", "status"));
+  } else if (state.status === "error") {
+    list.appendChild(createErrorMessage(state.message, onRetry));
+  } else if (state.data.length === 0) {
+    list.appendChild(createStatusMessage("No upcoming deadlines.", "status"));
+  } else {
+    for (const deadline of state.data) {
+      list.appendChild(createDeadlineItem(deadline));
+    }
   }
 }
