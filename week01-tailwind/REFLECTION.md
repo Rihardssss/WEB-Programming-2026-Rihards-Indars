@@ -8,29 +8,20 @@ Ieteicamais kopējais apjoms: **aptuveni 200–300 vārdi**.
 
 ## 1. Utility-first CSS pieeja
 
-Savā formulējumā paskaidrojiet, ko nozīmē **utility-first CSS** pieeja.
-
-Kā pāreja no `styles.css` uz Tailwind CSS mainīja to, **kur un kā tiek aprakstīts tīmekļa lapas vizuālais noformējums**?
+Tailwind izmanto mazas gatavas klases, piemēram, `p-4`, `text-center` un `flex`, lai veidotu lapas izskatu. Šīs klases raksta uzreiz HTML elementos, tāpēc nav katru reizi jāraksta atsevišķi CSS noteikumi. Pirms tam man lielākā daļa stilu bija `styles.css` failā, bet ar Tailwind tos var pievienot uzreiz pie vajadzīgā elementa.
 
 ---
 
 ## 2. Divi migrācijas piemēri
 
-Izvēlieties **divas tīmekļa vietnes daļas**, kuras jūs pats/pati pārveidojāt no tradicionālā CSS uz Tailwind CSS.
+Pirmais piemērs ir mobilā izvēlne. Sākumā tās izkārtojumu, atstarpes un krāsas noteica parastais CSS, bet pēc pārveidošanas izmantoju `flex`, `items-center`, `justify-between` un `p-4` klases.
 
-Katram piemēram paskaidrojiet:
-
-- ko darīja sākotnējais CSS kods;
-- kuras Tailwind CSS utilītklases jūs izmantojāt;
-- kāpēc izvēlētās utilītklases nodrošina nepieciešamo rezultātu.
+Otrais piemērs ir projektu filtri. Pogām sākumā bija CSS noteikumi izmēram, atstarpēm un izskatam, bet Tailwind izmantoju `px-4`, `py-2`, `rounded`, `border` un `hover:` klases, lai panāktu līdzīgu rezultātu.
 
 ---
 
 ## 3. Jūsu vērtējums
 
-Aprakstiet:
+Man Tailwind šķiet ērtāks, ja vajag ātri izveidot lapas izkārtojumu un pielāgot elementu izskatu, jo nav visu laiku jāmeklē vajadzīgais CSS fails. Sākumā gan bija mazliet grūtāk saprast, kura klase ko dara.
 
-- vienu situāciju, kurā Tailwind CSS, jūsuprāt, ir ērtāks par tradicionālo CSS;
-- vienu situāciju, kurā jūs dotu priekšroku individuāli rakstītam CSS.
-
-Pamatojiet savu viedokli.
+Parasto CSS es izvēlētos tad, ja vajadzētu izveidot sarežģītākus vai ļoti specifiskus stilus, jo pārāk daudz Tailwind klašu vienā elementā dažreiz kļūst grūti pārskatīt.
