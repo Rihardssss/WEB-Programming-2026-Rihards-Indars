@@ -1,5 +1,21 @@
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Resources from "./components/Resources";
+import Footer from "./components/Footer";
+
 function App() {
-  return <h1 className="p-8 text-3xl font-bold text-primary">CampusFlow</h1>;
+  return (
+    <>
+      <Header userName="Alex Student" userInitials="AZ" course="Web Programming" />
+      <main>
+        <Hero />
+        <section className="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-16 sm:px-5">
+          <Resources />
+        </section>
+      </main>
+      <Footer note="Starter project for CSS → Tailwind migration" />
+    </>
+  );
 }
 
 export default App;
