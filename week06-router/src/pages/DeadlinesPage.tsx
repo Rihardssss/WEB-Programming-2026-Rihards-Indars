@@ -1,12 +1,17 @@
 import type { Deadline, LoadState } from "../types";
+import DeadlineSection from "../components/DeadlineSection";
 
 interface DeadlinesPageProps {
   deadlines: LoadState<Deadline[]>;
   onRetry: () => void;
 }
 
-function DeadlinesPage(_props: DeadlinesPageProps) {
-  return <h1 className="p-8 text-3xl font-bold text-primary">Deadlines</h1>;
+function DeadlinesPage({ deadlines, onRetry }: DeadlinesPageProps) {
+  return (
+    <section className="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-16 sm:px-5">
+      <DeadlineSection state={deadlines} onRetry={onRetry} />
+    </section>
+  );
 }
 
 export default DeadlinesPage;

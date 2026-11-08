@@ -45,7 +45,6 @@ function App(props: AppProps) {
               projects={projectsState}
               deadlines={props.deadlines}
               weather={props.weather}
-              onRetryProjects={props.onRetryProjects}
               onRetryDeadlines={props.onRetryDeadlines}
             />
           }

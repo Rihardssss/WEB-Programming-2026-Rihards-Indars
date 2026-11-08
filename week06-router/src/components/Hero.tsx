@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 function Hero() {
   return (
     <section className="bg-[radial-gradient(circle_at_15%_10%,rgba(109,93,252,0.14),transparent_34%),radial-gradient(circle_at_85%_0%,rgba(55,136,255,0.10),transparent_28%)] pt-[42px] pb-12 sm:pt-16">
@@ -13,12 +15,12 @@ function Hero() {
             Track your current web-development tasks, upcoming deadlines, and project progress in one place.
           </p>
           <div className="mt-[30px] grid gap-3 sm:flex sm:flex-wrap">
-            <a
+            <Link
               className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl bg-primary px-[18px] text-sm font-bold text-white shadow-button transition-all duration-150 hover:-translate-y-px hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto"
-              href="#projects"
+              to="/projects"
             >
               View projects
-            </a>
+            </Link>
             <a
               className="inline-flex min-h-[44px] w-full items-center justify-center rounded-xl border border-app-line bg-white px-[18px] text-sm font-bold transition-all duration-150 hover:-translate-y-px hover:shadow-[0_10px_24px_rgba(34,45,78,0.08)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto"
               href="#resources"

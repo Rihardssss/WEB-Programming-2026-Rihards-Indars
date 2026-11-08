@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Category, Project } from "../types";
 
 const CATEGORY_BADGE_CLASS: Record<Category, string> = {
@@ -64,12 +65,12 @@ function ProjectCard({ project }: ProjectCardProps) {
         ></div>
       </div>
 
-      <a
+      <Link
         className="mt-[18px] inline-block text-xs font-extrabold text-primary hover:text-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
-        href="#"
+        to={`/projects/${project.id}`}
       >
         {project.status === "done" ? "View submission →" : "Open project →"}
-      </a>
+      </Link>
     </article>
   );
 }

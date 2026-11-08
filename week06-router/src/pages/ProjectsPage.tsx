@@ -1,4 +1,5 @@
 import type { LoadState, Project } from "../types";
+import ProjectSection from "../components/ProjectSection";
 
 interface ProjectsPageProps {
   projects: LoadState<Project[]>;
@@ -6,8 +7,8 @@ interface ProjectsPageProps {
   onAdd: (project: Project) => void;
 }
 
-function ProjectsPage(_props: ProjectsPageProps) {
-  return <h1 className="p-8 text-3xl font-bold text-primary">Projects</h1>;
+function ProjectsPage({ projects, onRetry, onAdd }: ProjectsPageProps) {
+  return <ProjectSection state={projects} onRetry={onRetry} onAdd={onAdd} />;
 }
 
 export default ProjectsPage;
