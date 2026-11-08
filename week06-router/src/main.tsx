@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
 import "./index.css";
 import App from "./App.tsx";
 import { fetchDeadlines, fetchProjects, fetchWeather } from "./api.ts";
@@ -18,13 +19,15 @@ let weather: LoadState<CurrentWeather> = { status: "loading" };
 function render(): void {
   root.render(
     <StrictMode>
-      <App
-        projects={projects}
-        deadlines={deadlines}
-        weather={weather}
-        onRetryProjects={() => void loadProjects()}
-        onRetryDeadlines={() => void loadDeadlines()}
-      />
+      <BrowserRouter>
+        <App
+          projects={projects}
+          deadlines={deadlines}
+          weather={weather}
+          onRetryProjects={() => void loadProjects()}
+          onRetryDeadlines={() => void loadDeadlines()}
+        />
+      </BrowserRouter>
     </StrictMode>,
   );
 }
