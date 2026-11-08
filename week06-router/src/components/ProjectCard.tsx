@@ -1,19 +1,6 @@
 import { Link } from "react-router";
-import type { Category, Project } from "../types";
-
-const CATEGORY_BADGE_CLASS: Record<Category, string> = {
-  Frontend: "bg-[#f0edff] text-[#6352ed]",
-  API: "bg-[#eaf3ff] text-[#2f78d6]",
-  JavaScript: "bg-[#e9f8f2] text-[#16875b]",
-  Design: "bg-[#fff5de] text-[#9a6c16]",
-};
-
-const CATEGORY_BAR_CLASS: Record<Category, string> = {
-  Frontend: "bg-primary",
-  API: "bg-accent-blue",
-  JavaScript: "bg-accent-green",
-  Design: "bg-accent-yellow",
-};
+import type { Project } from "../types";
+import { categoryBadge, progressColor, statusLabel } from "../projectStyles";
 
 function formatDateShort(dateStr: string): string {
   const [year, month, day] = dateStr.split("-").map(Number);
@@ -37,14 +24,14 @@ function ProjectCard({ project }: ProjectCardProps) {
     >
       <div className="flex items-center justify-between gap-3">
         <span
-          className={`inline-flex min-h-[25px] items-center rounded-full px-[9px] text-[10px] font-extrabold ${CATEGORY_BADGE_CLASS[project.category]}`}
+          className={`inline-flex min-h-[25px] items-center rounded-full px-[9px] text-[10px] font-extrabold ${categoryBadge[project.category]}`}
         >
           {project.category}
         </span>
         <span
           className={`inline-flex min-h-[25px] items-center rounded-full px-[9px] text-[10px] font-extrabold ${statusClasses}`}
         >
-          {project.status === "done" ? "Done" : "Active"}
+          {statusLabel[project.status]}
         </span>
       </div>
 
@@ -60,7 +47,7 @@ function ProjectCard({ project }: ProjectCardProps) {
 
       <div className="h-[7px] overflow-hidden rounded-full bg-[#eceef4]">
         <div
-          className={`h-full rounded-full ${CATEGORY_BAR_CLASS[project.category]}`}
+          className={`h-full rounded-full ${progressColor[project.category]}`}
           style={{ width: `${project.progress}%` }}
         ></div>
       </div>
