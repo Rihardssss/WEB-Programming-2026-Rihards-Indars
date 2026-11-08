@@ -50,3 +50,7 @@ export function isCurrentWeatherPayload(
     typeof value.weather_code === "number"
   );
 }
+
+export function isProjectList(value: unknown): value is Project[] {
+  return Array.isArray(value) && value.every(isProject);
+}

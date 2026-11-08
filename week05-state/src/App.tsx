@@ -1,5 +1,6 @@
-import { useState } from "react";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
+import { isProjectList } from "./guards";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import SectionHeading from "./components/SectionHeading";
@@ -25,8 +26,10 @@ function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadS
   return { status: "success", data: [...state.data, ...local] };
 }
 
+const STORAGE_KEY = "campusflow.week05.localProjects";
+
 function App(props: AppProps) {
-  const [localProjects, setLocalProjects] = useState<Project[]>([]);
+  const [localProjects, setLocalProjects] = useLocalStorage<Project[]>(STORAGE_KEY, [], isProjectList);
 
   const projectsState = withLocalProjects(props.projects, localProjects);
 
