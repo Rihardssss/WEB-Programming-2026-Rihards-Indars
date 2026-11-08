@@ -8,10 +8,16 @@ import AddProjectForm from "./AddProjectForm";
 interface ProjectSectionProps {
   state: LoadState<Project[]>;
   onRetry: () => void;
+  onAdd: (project: Project) => void;
 }
 
-function ProjectSection({ state, onRetry }: ProjectSectionProps) {
+function ProjectSection({ state, onRetry, onAdd }: ProjectSectionProps) {
   const [filter, setFilter] = useState<ProjectFilter>("all");
+
+  function handleAdd(project: Project): void {
+    onAdd(project);
+    setFilter("all");
+  }
 
   return (
     <section className="mx-auto w-full max-w-[1180px] px-3.5 pt-[34px] pb-4 sm:px-5" id="projects">
@@ -22,7 +28,7 @@ function ProjectSection({ state, onRetry }: ProjectSectionProps) {
 
       <div className="mt-[34px]">
         <SectionHeading eyebrow="NEW" title="Add a project" />
-        <AddProjectForm disabled={false} onAdd={() => {}} />
+        <AddProjectForm disabled={state.status !== "success"} onAdd={handleAdd} />
       </div>
     </section>
   );

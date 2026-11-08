@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { CurrentWeather, Deadline, LoadState, Project } from "./types";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -17,13 +18,28 @@ interface AppProps {
   onRetryDeadlines: () => void;
 }
 
+function withLocalProjects(state: LoadState<Project[]>, local: Project[]): LoadState<Project[]> {
+  if (state.status !== "success") {
+    return state;
+  }
+  return { status: "success", data: [...state.data, ...local] };
+}
+
 function App(props: AppProps) {
+  const [localProjects, setLocalProjects] = useState<Project[]>([]);
+
+  const projectsState = withLocalProjects(props.projects, localProjects);
+
   const activeProjectsValue =
-    props.projects.status === "loading"
+    projectsState.status === "loading"
       ? "…"
-      : props.projects.status === "error"
+      : projectsState.status === "error"
         ? "–"
-        : String(props.projects.data.filter((project) => project.status === "active").length);
+        : String(projectsState.data.filter((project) => project.status === "active").length);
+
+  function handleAdd(project: Project): void {
+    setLocalProjects([...localProjects, project]);
+  }
 
   return (
     <>
@@ -53,7 +69,7 @@ function App(props: AppProps) {
               index="01"
               label="Active projects"
               value={activeProjectsValue}
-              note="+1 this month"
+              note="API + your projects"
               tone="positive"
             />
             <StatCard index="02" label="Tasks completed" value="18" note="+6 this week" tone="positive" />
@@ -62,7 +78,7 @@ function App(props: AppProps) {
           </div>
         </section>
 
-        <ProjectSection state={props.projects} onRetry={props.onRetryProjects} />
+        <ProjectSection state={projectsState} onRetry={props.onRetryProjects} onAdd={handleAdd} />
 
         <section className="mx-auto grid w-full max-w-[1180px] grid-cols-1 gap-[18px] px-3.5 pt-[34px] pb-16 sm:px-5 min-[960px]:grid-cols-[1.45fr_0.75fr]">
           <section className="rounded-card border border-app-line bg-app-surface p-6" id="deadlines">
